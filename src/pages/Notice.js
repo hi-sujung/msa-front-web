@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { AiFillHeart, AiOutlineHeart, AiFillHome } from 'react-icons/ai';
-
 import { useAuth } from './../utils/AuthContext';
 import '../styles/Activity.css';
 
@@ -35,7 +34,7 @@ export default function Notice() {
     };
 
     try {
-      const response = await axios.get(`${activityUrl}id?id=${activityId}&memberId=${email}`);
+      const response = await axios.get(`${activityUrl}id?actId=${activityId}&memberId=${email}`);
       if (response.status === 200) {
         const data = response.data;
         setActivityData(data);
@@ -117,8 +116,8 @@ export default function Notice() {
     navigate('/actList');
   };
 
-  const handleActivityPress = (activityId) => {
-    navigate(`/notice/${activityId}`);
+  const handleActivityPress = (id) => {
+    navigate(`/notice/${id}`);
   };
 
   const handleHomePress = () => {
