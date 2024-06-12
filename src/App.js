@@ -8,6 +8,11 @@ import ActivityList from './pages/ActivityList';
 import PortfolioList from './pages/PortfolioList';
 import MyPortfolio from './pages/MyPortfolio';
 import CreatePortfolio from './pages/CreatePortfolio';
+import Activity from './pages/Activity';
+import Notice from './pages/Notice';
+import LikedNotice from './pages/LikedNotice';
+import Login from './pages/Login';
+import MailSend from './pages/MailSend';
 import { AuthProvider } from './utils/AuthContext';
 
 function App() {
@@ -16,7 +21,11 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} /> 
+        <Route path="/mailSend" element={<MailSend />} /> 
         <Route path="/register" element={<Register />} />
+        <Route path="/notice/:activityId" element={<Notice />} />
+        <Route path="/activity/:activityId" element={<Activity />} />
         <Route path="/noticeList" element={<NoticeList />} />
         <Route path="/activityList" element={<ActivityList />} />
         <Route path='/portfolioList' element={<PortfolioList />} />

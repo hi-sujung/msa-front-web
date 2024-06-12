@@ -1,8 +1,15 @@
 // 사용자 인증 관련 저장
 import React, { createContext, useContext, useState } from 'react';
 
-const AuthContext = createContext();
+// AuthContext 생성
+const AuthContext = createContext({
+  user: null,
+  token: null,
+  login: () => {},
+  logout: () => {}
+});
 
+// AuthProvider 정의
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
@@ -27,4 +34,5 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
+// useAuth 커스텀 훅
 export const useAuth = () => useContext(AuthContext);
