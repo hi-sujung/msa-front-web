@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-// import { useAuth } from './../utils/AuthContext';
+import { useAuth } from './../utils/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Login.css'; 
 
 function Login() {
-//   const { login } = useAuth();
+  const { login } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
@@ -13,7 +13,6 @@ function Login() {
   const [errorMessage, setErrorMessage] = useState('');
 
   const memberUrl = process.env.REACT_APP_MEMBER_API_URL;
-
   const navigate = useNavigate();
 
   const handleLogin = async () => {
@@ -32,7 +31,7 @@ function Login() {
         const token = response.data.token;
         const userInfo = { id: response.data.userId, name: response.data.username, email: response.data.email };
 
-        // login(token, userInfo);
+        login(token, userInfo);
 
         console.log('login successful');
 

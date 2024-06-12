@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { AiFillHeart, AiOutlineHeart, AiFillHome } from 'react-icons/ai';
-
 import { useAuth } from './../utils/AuthContext';
 import '../styles/Activity.css';
 
@@ -10,11 +9,11 @@ const API_URL = 'http://10.0.2.2:8083/notice/externalact';
 const R_API_URL = 'http://10.0.2.2:8083/notice/univactivity';
 const email = '20211149@sungshin.ac.kr';
 
-const activityUrl = process.env.REACT_APP_ACTIVITY_API_URL;
+const activityUrl = process.env.REACT_APP_NOTICE_API_URL;
 const SPRING_GATEWAY_URL = '';
 
 
-export default function Activity() {
+export default function Notice() {
   const [initialLikedState, setInitialLikedState] = useState(false);
   const [heartFilled, setHeartFilled] = useState('');
   const [attendFilled, setAttendFilled] = useState('');
@@ -35,7 +34,7 @@ export default function Activity() {
     };
 
     try {
-      const response = await axios.get(`${activityUrl}id?id=${activityId}&memberId=${email}`);
+      const response = await axios.get(`${activityUrl}id?actId=${activityId}&memberId=${email}`);
       if (response.status === 200) {
         const data = response.data;
         setActivityData(data);
@@ -117,8 +116,8 @@ export default function Activity() {
     navigate('/actList');
   };
 
-  const handleActivityPress = (activityId) => {
-    navigate(`/activity/${activityId}`);
+  const handleActivityPress = (id) => {
+    navigate(`/notice/${id}`);
   };
 
   const handleHomePress = () => {
@@ -154,7 +153,7 @@ export default function Activity() {
         <div className="activityList">
           <div className="activityItem">
             <div className="activityDetails">
-              <span className="activityCategory">대외활동</span>
+              <span className="activityCategory">공지사항</span>
             </div>
             <div>
               <h1 className="activityItemTitle">{activityData.title}</h1>
