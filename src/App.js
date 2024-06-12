@@ -14,7 +14,8 @@ import { AuthProvider } from './utils/AuthContext';
 
 function App() {
   return (
-    <div>
+    <AuthProvider>
+      <div>
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -27,6 +28,7 @@ function App() {
         <Route path="/activity/:activityId" element={<Activity />} />
       </Routes>
     </div>
+    </AuthProvider>
   );
 }
 

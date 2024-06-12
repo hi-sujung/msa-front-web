@@ -24,6 +24,12 @@ export default function Notice() {
     fetchRecActivityDetail();
   }, []);
 
+  useEffect(() => {
+    if (activityData.isLiked === 1) {
+      setHeartFilled(true);
+    }
+  }, [activityData]);
+
   const fetchActivityDetail = async () => {
     const headers = {
         Authorization: `Bearer ${token}`
@@ -42,14 +48,18 @@ export default function Notice() {
     }
   };
 
+  const handleNoticePress = (activityId) => {
+    navigate(`/notice/${activityId}`);
+  };
+
   const toggleHeart = async () => {
     const headers = {
       Authorization: `Bearer ${token}`
     };
-
+  
     try {
-      if (heartFilled) {
-        const response = await axios.delete(`${springNoticeUrl}likecancel?id=${activityId}`, { headers });
+      if (heartFilled === true) { 
+        const response = await axios.delete(`${springNoticeUrl}like-cancel?id=${activityId}`, { headers });
         if (response.status === 200) {
           setHeartFilled(false);
         }
@@ -57,12 +67,14 @@ export default function Notice() {
         const response = await axios.post(`${springNoticeUrl}like?actId=${activityId}`, { headers });
         if (response.status === 200) {
           setHeartFilled(true);
+          console.log("좋아요 완료:" + activityId)
         }
       }
     } catch (error) {
       console.error('Error toggling like:', error);
     }
   };
+  
 
   const toggleAttend = async () => {
     const headers = {
@@ -74,11 +86,13 @@ export default function Notice() {
         const response = await axios.delete(`${springNoticeUrl}check-cancel?id=${activityId}`, {headers});
         if (response.status === 200) {
           setAttendFilled(false);
+          console.log("참여 삭제 완료:" + activityId)
         }
       } else {
         const response = await axios.post(`${springNoticeUrl}check?actId=${activityId}`, {headers});
         if (response.status === 200) {
           setAttendFilled(true);
+          console.log("참여 완료:" + activityId)
         }
       }
     } catch (error) {
@@ -99,7 +113,7 @@ export default function Notice() {
 
   const fetchRecActivityDetail = async () => {
     try {
-      const response = await axios.get(`${recNotice}?id=${activityId}`);
+      const response = await axios.get(`${recNotice}univ?activity_name=${activityId}`);
       if (response.status === 200) {
         setRecActivityData(response.data);
       }
@@ -184,3 +198,4 @@ export default function Notice() {
     </div>
   );
 }
+

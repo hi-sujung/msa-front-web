@@ -100,7 +100,7 @@ export default function Activity() {
 
   const fetchRecActivityDetail = async () => {
     try {
-      const response = await axios.get(`${recNotice}external?id=${activityId}`);
+      const response = await axios.get(`${recNotice}external?activity_name=${activityId}`);
       if (response.status === 200) {
         setRecActivityData(response.data);
       }

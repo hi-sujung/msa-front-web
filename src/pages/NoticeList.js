@@ -8,7 +8,7 @@ function NoticeList() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  
+
   const activityUrl = process.env.REACT_APP_NOTICE_API_URL;
 
   useEffect(() => {
