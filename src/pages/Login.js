@@ -36,7 +36,7 @@ function Login() {
 
         console.log('login successful');
 
-        navigate('/main'); // main.js 화면으로 이동
+        navigate('/'); 
       } else {
         setShowSuccessMessage(false);
         setShowErrorText(true);
