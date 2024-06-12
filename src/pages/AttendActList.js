@@ -16,8 +16,6 @@ export default function AttendActList() {
   const springActivityUrl = process.env.REACT_APP_SPRING_GATEWAY_ACTIVITY_URL;
   const springAutoCreateUrl = process.env.REACT_APP_SPRING_GATEWAY_AUTOPORTFOLIO_URL;
 
-  const history = useHistory();
-
   useEffect(() => {
     fetchAttendData();
   }, []);

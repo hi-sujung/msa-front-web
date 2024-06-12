@@ -33,6 +33,8 @@ function Login() {
 
         login(token, userInfo);
 
+        console.log(token);
+
         console.log('login successful');
 
         navigate('/'); 

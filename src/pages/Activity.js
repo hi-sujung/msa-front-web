@@ -175,7 +175,7 @@ export default function Activity() {
         <div className="recommended">
           <h2 className="recommendedTitle">추천 게시물</h2>
           {recActivityData.map(item => (
-            <div className="recommendedItem" key={item.external_act_id} onClick={() => handleActivityPress(item.external_act_id)}>
+            <div className="recommendedItem" key={`rec-${item.external_act_id}`} onClick={() => handleActivityPress(item.external_act_id)}>
               <span className="recommendedItemTitle">{item.title}</span>
             </div>
           ))}

@@ -19,6 +19,8 @@ export default function Notice() {
   const { user, token } = useAuth();
   const navigate = useNavigate();
 
+  console.log(token);
+
   useEffect(() => {
     fetchActivityDetail();
     fetchRecActivityDetail();
@@ -92,7 +94,9 @@ export default function Notice() {
       const response = await axios.get(`${recNotice}univ?activity_name=${activityId}`);
       if (response.status === 200) {
         setRecActivityData(response.data);
+        console.log(response.data);
       }
+      
     } catch (error) {
       console.error('Error fetching recommended activity detail:', error);
     }
@@ -102,8 +106,8 @@ export default function Notice() {
     navigate('/actList');
   };
 
-  const handleActivityPress = (id) => {
-    navigate(`/notice/${id}`);
+  const handleActivityPress = (activityId) => {
+    navigate(`/notice/${activityId}`);
   };
 
   const handleHomePress = () => {
@@ -149,10 +153,15 @@ export default function Notice() {
           </div>
         </div>
 
+        <div className="buttonContainer">
+          <button className="heartButton" onClick={toggleHeart}>
+            {heartFilled ? <AiFillHeart color="red" /> : <AiOutlineHeart />}
+          </button>
+        </div>
         <div className="recommended">
           <h2 className="recommendedTitle">추천 게시물</h2>
           {recActivityData.map(item => (
-            <div className="recommendedItem" key={item.external_act_id} onClick={() => handleActivityPress(item.external_act_id)}>
+            <div className="recommendedItem" key={item.univ_activity_id} onClick={() => handleActivityPress(item.univ_activity_id)}>
               <span className="recommendedItemTitle">{item.title}</span>
             </div>
           ))}
