@@ -5,11 +5,11 @@ import { AiFillHeart, AiOutlineHeart, AiFillHome } from 'react-icons/ai';
 import { useAuth } from './../utils/AuthContext';
 import '../styles/Activity.css';
 
-const activityUrl = process.env.REACT_APP_ACTIVITY_API_URL;
-const springActivityUrl = process.env.REACT_APP_SPRING_GATEWAY_ACTIVITY_URL;
+const activityUrl = process.env.REACT_APP_NOTICE_API_URL;
+const springNoticeUrl = process.env.REACT_APP_SPRING_GATEWAY_NOTICE_URL;
 const recNotice = process.env.REACT_APP_REC_API_URL;
 
-export default function Activity() {
+export default function Notice() {
   const [initialLikedState, setInitialLikedState] = useState(false);
   const [heartFilled, setHeartFilled] = useState('');
   const [attendFilled, setAttendFilled] = useState('');
@@ -24,13 +24,19 @@ export default function Activity() {
     fetchRecActivityDetail();
   }, []);
 
+  useEffect(() => {
+    if (activityData.isLiked === 1) {
+      setHeartFilled(true);
+    }
+  }, [activityData]);
+
   const fetchActivityDetail = async () => {
     const headers = {
-     Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${token}`
     };
 
     try {
-      const response = await axios.get(`${springActivityUrl}id?id=${activityId}`, { headers });
+      const response = await axios.get(`${springNoticeUrl}id?actId=${activityId}`, {headers});
       if (response.status === 200) {
         const data = response.data;
         setActivityData(data);
@@ -42,49 +48,33 @@ export default function Activity() {
     }
   };
 
+  const handleNoticePress = (activityId) => {
+    navigate(`/notice/${activityId}`);
+  };
+
   const toggleHeart = async () => {
     const headers = {
       Authorization: `Bearer ${token}`
     };
-
+  
     try {
-      if (heartFilled) {
-        const response = await axios.delete(`${springActivityUrl}likecancel?id=${activityId}`, { headers });
+      if (heartFilled === true) { 
+        const response = await axios.delete(`${springNoticeUrl}like-cancel?id=${activityId}`, { headers });
         if (response.status === 200) {
           setHeartFilled(false);
         }
       } else {
-        const response = await axios.post(`${springActivityUrl}like?actId=${activityId}`, { headers });
+        const response = await axios.post(`${springNoticeUrl}like?actId=${activityId}`, { headers });
         if (response.status === 200) {
           setHeartFilled(true);
+          console.log("좋아요 완료:" + activityId)
         }
       }
     } catch (error) {
       console.error('Error toggling like:', error);
     }
   };
-
-  const toggleAttend = async () => {
-    const headers = {
-      Authorization: `Bearer ${token}`
-    };
-
-    try {
-      if (attendFilled) {
-        const response = await axios.delete(`${springActivityUrl}check-cancel?id=${activityId}`, {headers});
-        if (response.status === 200) {
-          setAttendFilled(false);
-        }
-      } else {
-        const response = await axios.post(`${springActivityUrl}check?actId=${activityId}`, {headers});
-        if (response.status === 200) {
-          setAttendFilled(true);
-        }
-      }
-    } catch (error) {
-      console.error('Error toggling attendance:', error);
-    }
-  };
+  
 
   const handleReplace = () => {
     if (activityData && activityData.content) {
@@ -99,7 +89,7 @@ export default function Activity() {
 
   const fetchRecActivityDetail = async () => {
     try {
-      const response = await axios.get(`${recNotice}external?activity_name=${activityId}`);
+      const response = await axios.get(`${recNotice}univ?activity_name=${activityId}`);
       if (response.status === 200) {
         setRecActivityData(response.data);
       }
@@ -112,8 +102,8 @@ export default function Activity() {
     navigate('/actList');
   };
 
-  const handleActivityPress = (activityId) => {
-    navigate(`/activity/${activityId}`);
+  const handleActivityPress = (id) => {
+    navigate(`/notice/${id}`);
   };
 
   const handleHomePress = () => {
@@ -149,7 +139,7 @@ export default function Activity() {
         <div className="activityList">
           <div className="activityItem">
             <div className="activityDetails">
-              <span className="activityCategory">대외활동</span>
+              <span className="activityCategory">공지사항</span>
             </div>
             <div>
               <h1 className="activityItemTitle">{activityData.title}</h1>
@@ -157,19 +147,6 @@ export default function Activity() {
               <p className="activityDescription">{formattedContent}</p>
             </div>
           </div>
-        </div>
-
-        <div className="buttonContainer">
-          <button className="heartButton" onClick={toggleHeart}>
-            {heartFilled ? <AiFillHeart color="red" /> : <AiOutlineHeart />}
-          </button>
-          <button
-            className="attendButton"
-            onClick={toggleAttend}
-            style={{ backgroundColor: attendFilled ? "grey" : "rgba(153, 153, 255, 0.3)" }}
-          >
-            {attendFilled ? "참여 취소" : "참여"}
-          </button>
         </div>
 
         <div className="recommended">
@@ -184,3 +161,4 @@ export default function Activity() {
     </div>
   );
 }
+
