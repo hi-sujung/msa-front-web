@@ -10,9 +10,6 @@ const activityUrl = process.env.REACT_APP_ACTIVITY_API_URL;
 const springActivityUrl = process.env.REACT_APP_SPRING_GATEWAY_ACTIVITY_URL;
 const recNotice = process.env.REACT_APP_REC_API_URL;
 
-const SPRING_GATEWAY_URL = '';
-
-
 export default function Activity() {
   const [initialLikedState, setInitialLikedState] = useState(false);
   const [heartFilled, setHeartFilled] = useState('');

@@ -9,9 +9,6 @@ const activityUrl = process.env.REACT_APP_NOTICE_API_URL;
 const springNoticeUrl = process.env.REACT_APP_SPRING_GATEWAY_NOTICE_URL;
 const recNotice = process.env.REACT_APP_REC_API_URL;
 
-const SPRING_GATEWAY_URL = '';
-
-
 export default function Notice() {
   const [initialLikedState, setInitialLikedState] = useState(false);
   const [heartFilled, setHeartFilled] = useState('');
