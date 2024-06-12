@@ -76,30 +76,6 @@ export default function Notice() {
   };
   
 
-  const toggleAttend = async () => {
-    const headers = {
-      Authorization: `Bearer ${token}`
-    };
-
-    try {
-      if (attendFilled) {
-        const response = await axios.delete(`${springNoticeUrl}check-cancel?id=${activityId}`, {headers});
-        if (response.status === 200) {
-          setAttendFilled(false);
-          console.log("참여 삭제 완료:" + activityId)
-        }
-      } else {
-        const response = await axios.post(`${springNoticeUrl}check?actId=${activityId}`, {headers});
-        if (response.status === 200) {
-          setAttendFilled(true);
-          console.log("참여 완료:" + activityId)
-        }
-      }
-    } catch (error) {
-      console.error('Error toggling attendance:', error);
-    }
-  };
-
   const handleReplace = () => {
     if (activityData && activityData.content) {
       return activityData.content.replaceAll('\\n', "\n");
@@ -171,19 +147,6 @@ export default function Notice() {
               <p className="activityDescription">{formattedContent}</p>
             </div>
           </div>
-        </div>
-
-        <div className="buttonContainer">
-          <button className="heartButton" onClick={toggleHeart}>
-            {heartFilled ? <AiFillHeart color="red" /> : <AiOutlineHeart />}
-          </button>
-          <button
-            className="attendButton"
-            onClick={toggleAttend}
-            style={{ backgroundColor: attendFilled ? "grey" : "rgba(153, 153, 255, 0.3)" }}
-          >
-            {attendFilled ? "참여 취소" : "참여"}
-          </button>
         </div>
 
         <div className="recommended">

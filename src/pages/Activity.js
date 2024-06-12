@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { AiFillHeart, AiOutlineHeart, AiFillHome } from 'react-icons/ai';
-
 import { useAuth } from './../utils/AuthContext';
 import '../styles/Activity.css';
 
