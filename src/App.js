@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Register from './pages/Register';
 import NoticeList from './pages/NoticeList';
 import ActivityList from './pages/ActivityList';
+import Login from './pages/Login';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/noticeList" element={<NoticeList />} />
         <Route path="/activityList" element={<ActivityList />} />
         {/* 다른 페이지들도 추가 가능 */}
+        <Route path="/login" element={<Login />} /> 
       </Routes>
     </div>
   );
