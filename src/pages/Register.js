@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
 
 export default function Register() {
   const [username, setUsername] = useState('');
@@ -12,6 +14,7 @@ export default function Register() {
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [showErrorText, setShowErrorText] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const navigate = useNavigate();
 
   const memberUrl = process.env.REACT_APP_MEMBER_API_URL;
 
@@ -34,7 +37,8 @@ export default function Register() {
         setShowErrorText(false);
         setErrorMessage('');
         console.log('Register Successful');
-        // Handle navigation logic here
+
+        navigate('/login');
       } else {
         setShowSuccessMessage(false);
         setShowErrorText(true);

@@ -5,13 +5,9 @@ import { AiFillHeart, AiOutlineHeart, AiFillHome } from 'react-icons/ai';
 import { useAuth } from './../utils/AuthContext';
 import '../styles/Activity.css';
 
-const API_URL = 'http://10.0.2.2:8083/notice/externalact';
-const R_API_URL = 'http://10.0.2.2:8083/notice/univactivity';
-const email = '20211149@sungshin.ac.kr';
-
 const activityUrl = process.env.REACT_APP_NOTICE_API_URL;
-const SPRING_GATEWAY_URL = '';
-
+const springNoticeUrl = process.env.REACT_APP_SPRING_GATEWAY_NOTICE_URL;
+const recNotice = process.env.REACT_APP_REC_API_URL;
 
 export default function Notice() {
   const [initialLikedState, setInitialLikedState] = useState(false);
@@ -20,7 +16,7 @@ export default function Notice() {
   const { activityId } = useParams();
   const [activityData, setActivityData] = useState({});
   const [recActivityData, setRecActivityData] = useState([]);
-  // const { user, token } = useAuth();
+  const { user, token } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -30,11 +26,11 @@ export default function Notice() {
 
   const fetchActivityDetail = async () => {
     const headers = {
-     // Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${token}`
     };
 
     try {
-      const response = await axios.get(`${activityUrl}id?actId=${activityId}&memberId=${email}`);
+      const response = await axios.get(`${springNoticeUrl}id?actId=${activityId}`, {headers});
       if (response.status === 200) {
         const data = response.data;
         setActivityData(data);
@@ -48,17 +44,17 @@ export default function Notice() {
 
   const toggleHeart = async () => {
     const headers = {
-      //Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`
     };
 
     try {
       if (heartFilled) {
-        const response = await axios.delete(`${SPRING_GATEWAY_URL}/notice/externalact/likecancel?id=${activityId}`, { headers });
+        const response = await axios.delete(`${springNoticeUrl}likecancel?id=${activityId}`, { headers });
         if (response.status === 200) {
           setHeartFilled(false);
         }
       } else {
-        const response = await axios.post(`${SPRING_GATEWAY_URL}/notice/externalact/like?actId=${activityId}`, { headers });
+        const response = await axios.post(`${springNoticeUrl}like?actId=${activityId}`, { headers });
         if (response.status === 200) {
           setHeartFilled(true);
         }
@@ -70,17 +66,17 @@ export default function Notice() {
 
   const toggleAttend = async () => {
     const headers = {
-      //Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`
     };
 
     try {
       if (attendFilled) {
-        const response = await axios.delete(`${API_URL}/check-cancel?id=${activityId}&memberId=${email}`);
+        const response = await axios.delete(`${springNoticeUrl}check-cancel?id=${activityId}`, {headers});
         if (response.status === 200) {
           setAttendFilled(false);
         }
       } else {
-        const response = await axios.post(`${API_URL}/check?actId=${activityId}&memberId=${email}`);
+        const response = await axios.post(`${springNoticeUrl}check?actId=${activityId}`, {headers});
         if (response.status === 200) {
           setAttendFilled(true);
         }
@@ -103,7 +99,7 @@ export default function Notice() {
 
   const fetchRecActivityDetail = async () => {
     try {
-      const response = await axios.get(`${API_URL}/?id=1${activityId}`);
+      const response = await axios.get(`${recNotice}?id=${activityId}`);
       if (response.status === 200) {
         setRecActivityData(response.data);
       }

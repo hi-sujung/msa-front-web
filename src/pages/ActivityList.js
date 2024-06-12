@@ -3,12 +3,13 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import '../styles/ActivityList.css';
 
+const activityUrl = process.env.REACT_APP_ACTIVITY_API_URL;
+
 function ActivityList() {
   const [activityList, setActivityList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  const activityUrl = process.env.REACT_APP_ACTIVITY_API_URL;
 
   useEffect(() => {
     const fetchActivityList = async () => {

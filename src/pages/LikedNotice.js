@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { useAuth } from './../utils/AuthContext';
 
-const SPRING_GATEWAY_URL = '';
-const activityUrl = process.env.REACT_APP_NOTICE_API_URL;
-const email = '20211149@sungshin.ac.kr';
-
+const springNoticeUrl = process.env.REACT_APP_SPRING_GATEWAY_NOTICE_URL;
+const springActivityUrl = process.env.REACT_APP_SPRING_GATEWAY_ACTIVITY_URL;
 
 export default function Notice() {
   const [uniLikeList, setUniLikeList] = useState([]);
   const [extLikeList, setExtLikeList] = useState([]);
+  const { user, token } = useAuth();
 
   useEffect(() => {
     fetchUniLikeData();
@@ -17,8 +17,12 @@ export default function Notice() {
   }, []);
 
   const fetchUniLikeData = async () => {
+    const headers = {
+        Authorization: `Bearer ${token}`
+      };
+
     try {
-      const response = await axios.get(`${activityUrl}like-list?memberId=${email}`);
+      const response = await axios.get(`${springNoticeUrl}like-list`, {headers});
       if (response.status === 200) {
         setUniLikeList(response.data); 
       }
@@ -28,8 +32,12 @@ export default function Notice() {
   };
 
   const fetchExtLikeData = async () => {
+    const headers = {
+        Authorization: `Bearer ${token}`
+      };
+
     try {
-      const response = await axios.get(`${SPRING_GATEWAY_URL}/notice/externalact/like-list`);
+      const response = await axios.get(`${springActivityUrl}like-list`, {headers});
       if (response.status === 200) {
         setExtLikeList(response.data); 
       }
