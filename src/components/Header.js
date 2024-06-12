@@ -64,10 +64,10 @@ function Header() {
               <Nav.Link as={Link} to="/likedNotice" style={linkStyle}>찜한 활동</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link as={Link} to="/portfolioList" style={linkStyle}>포트폴리오 목록</Nav.Link>
+              <Nav.Link as={Link} to="/attendActList" style={linkStyle}>참여한 대외활동</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link as={Link} to="/attendActList" style={linkStyle}>참여한 대외활동</Nav.Link>
+              <Nav.Link as={Link} to="/portfolioList" style={linkStyle}>포트폴리오 목록</Nav.Link>
             </Nav.Item>
           </Nav>
         </Navbar.Collapse>
