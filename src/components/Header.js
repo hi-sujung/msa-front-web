@@ -1,15 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 function Header() {
   return (
     <header>
       <nav>
         <ul>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/register">회원가입</Link></li>
-          <li><Link to="/noticeList">공지사항</Link></li>
-          <li><Link to="/activityList">대외활동</Link></li>
+          <li><a href="/">Home</a></li>
+          <li><a href="/register">회원가입</a></li>
+          <li><a href="/noticeList">공지사항</a></li>
+          <li><a href="/activityList">대외활동</a></li>
+          <li><a href="/portfolioList">포트폴리오 목록</a></li>
         </ul>
       </nav>
     </header>
