@@ -26,12 +26,15 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/notice/:activityId" element={<Notice />} />
         <Route path="/activity/:activityId" element={<Activity />} />
+        <Route path="/likedNotice" element={<LikedNotice />} />
         <Route path="/noticeList" element={<NoticeList />} />
         <Route path="/activityList" element={<ActivityList />} />
         <Route path='/portfolioList' element={<PortfolioList />} />
         <Route path='/myportfolio/:portfolioId' element={<MyPortfolio />} />
         <Route path='createportfolio' element={<CreatePortfolio />} />
         {/* 다른 페이지들도 추가 가능 */}
+        <Route path="/login" element={<Login />} /> 
+        <Route path="/mailSend" element={<MailSend />} /> 
       </Routes>
     </AuthProvider>
   );
