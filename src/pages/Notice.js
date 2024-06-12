@@ -10,11 +10,11 @@ const API_URL = 'http://10.0.2.2:8083/notice/externalact';
 const R_API_URL = 'http://10.0.2.2:8083/notice/univactivity';
 const email = '20211149@sungshin.ac.kr';
 
-const activityUrl = process.env.REACT_APP_ACTIVITY_API_URL;
+const activityUrl = process.env.REACT_APP_NOTICE_API_URL;
 const SPRING_GATEWAY_URL = '';
 
 
-export default function Activity() {
+export default function Notice() {
   const [initialLikedState, setInitialLikedState] = useState(false);
   const [heartFilled, setHeartFilled] = useState('');
   const [attendFilled, setAttendFilled] = useState('');
@@ -118,7 +118,7 @@ export default function Activity() {
   };
 
   const handleActivityPress = (activityId) => {
-    navigate(`/activity/${activityId}`);
+    navigate(`/notice/${activityId}`);
   };
 
   const handleHomePress = () => {
@@ -154,7 +154,7 @@ export default function Activity() {
         <div className="activityList">
           <div className="activityItem">
             <div className="activityDetails">
-              <span className="activityCategory">대외활동</span>
+              <span className="activityCategory">공지사항</span>
             </div>
             <div>
               <h1 className="activityItemTitle">{activityData.title}</h1>
