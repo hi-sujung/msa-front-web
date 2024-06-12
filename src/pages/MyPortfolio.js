@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useAuth } from './../utils/AuthContext';
 import '../styles/MyPortfolio.css';
 
 export default function MyPortfolio() {
-  const params = new URLSearchParams(window.location.search);
-  const portfolioId = params.get('portfolioId');
+  const { portfolioId } = useParams();
+  const navigate = useNavigate();
 
   const [portfolioData, setPortfolioData] = useState({});
   const [isEditMode, setIsEditMode] = useState(false);
@@ -12,8 +14,6 @@ export default function MyPortfolio() {
   const [editedSubTitle, setEditedSubTitle] = useState('');
   const [editedContent, setEditedContent] = useState('');
 
-  // 임시로 로컬 스토리지에서 토큰을 가져옴
-  const token = localStorage.getItem('token');
   const PORTFOLIO_URL = process.env.PORTFOLIO_URL;
 
   useEffect(() => {
@@ -22,11 +22,7 @@ export default function MyPortfolio() {
 
   const fetchPortfolioData = async () => {
     try {
-      const response = await axios.get(`${PORTFOLIO_URL}/id?id=${portfolioId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
+      const response = await axios.get(`${PORTFOLIO_URL}id?id=${portfolioId}`);
       if (response.status === 200) {
         setPortfolioData(response.data.data);
         setEditedTitle(response.data.data.title);
@@ -47,13 +43,8 @@ export default function MyPortfolio() {
 
     try {
       const response = await axios.post(
-        `${PORTFOLIO_URL}/update/id?id=${portfolioId}`,
-        updatedData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        }
+        `${PORTFOLIO_URL}update/id?id=${portfolioId}`,
+        updatedData
       );
 
       if (response.status === 200) {
@@ -70,21 +61,21 @@ export default function MyPortfolio() {
 
   const handleDelete = async () => {
     try {
-      const response = await axios.delete(`${PORTFOLIO_URL}/portfolio/id?id=${portfolioId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
+      const response = await axios.delete(`${PORTFOLIO_URL}portfolio/id?id=${portfolioId}`);
   
       if (response.status === 200) {
         console.log('Portfolio deleted');
-        window.location.href = '/main'; // 페이지 이동
+        handleHomePress();
       } else {
         console.error('Failed to delete portfolio:', response.status);
       }
     } catch (error) {
       console.error('Error deleting portfolio:', error);
     }
+  };
+
+  const handleHomePress = () => {
+    navigate('/');
   };
 
   return (

@@ -21,7 +21,7 @@ export default function MailSend() {
     try {
       const fullEmail = email + "@sungshin.ac.kr";
 
-      const response = await axios.post(`${memberUrl}/mailSend`,
+      const response = await axios.post(`${memberUrl}mailSend`,
         {
           email: fullEmail
         },

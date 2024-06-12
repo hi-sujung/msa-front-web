@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
+import '../styles/Register.css';
 
 export default function Register() {
   const [username, setUsername] = useState('');
@@ -11,7 +11,6 @@ export default function Register() {
   const [department1, setDepartment1] = useState('');
   const [department2, setDepartment2] = useState('');
   const [passwordMatchError, setPasswordMatchError] = useState(false);
-  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [showErrorText, setShowErrorText] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
@@ -21,8 +20,7 @@ export default function Register() {
   const handleRegister = async () => {
     handleChkPwd();
     try {
-    //   const response = await axios.post(`${API_URL}/join`, {
-        const response = await axios.post(`${memberUrl}/join`, {
+      const response = await axios.post(`${memberUrl}/join`, {
         email,
         username,
         password,
@@ -33,16 +31,13 @@ export default function Register() {
       });
 
       if (response.status === 200) {
-        setShowSuccessMessage(true);
         setShowErrorText(false);
         setErrorMessage('');
         console.log('Register Successful');
-
         navigate('/login');
       } else {
-        setShowSuccessMessage(false);
         setShowErrorText(true);
-        if (response.data.error) {
+        if (response.data && response.data.error) {
           setErrorMessage(response.data.error);
         } else {
           setErrorMessage('아이디 또는 비밀번호 형식이 올바르지 않습니다.');
@@ -51,21 +46,16 @@ export default function Register() {
     } catch (error) {
       console.error('Error Join in:', error);
       setErrorMessage('회원가입에 실패하였습니다.' + error.message);
-      setShowSuccessMessage(false);
       setShowErrorText(true);
     }
   };
 
   const handleChkPwd = () => {
-    if (password !== confirmPassword) {
-      setPasswordMatchError(true);
-      return;
-    }
-    setPasswordMatchError(false);
+    setPasswordMatchError(password !== confirmPassword);
   };
 
   return (
-    <div>
+    <div className="register-container">
       <h1>회원가입</h1>
       <input
         type="text"
@@ -95,15 +85,61 @@ export default function Register() {
         <option value="">-- 주전공 --</option>
         <option value="국어국문학과">국어국문학과</option>
         <option value="영어영문학과">영어영문학과</option>
+        <option value="독일어문·문화학과">독일어문·문화학과</option>
+        <option value="프랑스어문·문화학과">프랑스어문·문화학과</option>
+        <option value="일본어문·문화학과">일본어문·문화학과</option>
+        <option value="중국어문·문화학과">중국어문·문화학과</option>
+        <option value="사학과">사학과</option>
+        <option value="문화예술경영학과">문화예술경영학과</option>
+        <option value="미디어영상연기학과">미디어영상연기학과</option>
+        <option value="현대실용음악학과">현대실용음악학과</option>
+        <option value="무용예술학과">무용예술학과</option>
+        <option value="정치외교학과">정치외교학과</option>
+        <option value="심리학과">심리학과</option>
+        <option value="지리학과">지리학과</option>
+        <option value="미디어커뮤니케이션학과">미디어커뮤니케이션학과</option>
+        <option value="경영학부">경영학부</option>
+        <option value="사회복지학과">사회복지학과</option>
+        <option value="법학부">법학부</option>
+        <option value="의류산업학과">의류산업학과</option>
+        <option value="소비자생활문화산업학과">소비자생활문화산업학과</option>
+        <option value="뷰티산업학과">뷰티산업학과</option>
+        <option value="수리통계데이터사이언스학부">수리통계데이터사이언스학부</option>
+        <option value="화학·에너지융합학부">화학·에너지융합학부</option>
+        <option value="바이오신약의과학부">바이오신약의과학부</option>
+        <option value="바이오헬스융합학부">바이오헬스융합학부</option>
+        <option value="스포츠과학부">스포츠과학부</option>
+
+        
+        <option value="일본어문·문화학과">일본어문·문화학과</option>
+        <option value="중국어문·문화학과">중국어문·문화학과</option>
+        <option value="사학과">사학과</option>
+        <option value="문화예술경영학과">문화예술경영학과</option>
+        <option value="미디어영상연기학과">미디어영상연기학과</option>
+        <option value="현대실용음악학과">현대실용음악학과</option>
+        <option value="무용예술학과">무용예술학과</option>
+        <option value="정치외교학과">정치외교학과</option>
+        <option value="심리학과">심리학과</option>
+        <option value="지리학과">지리학과</option>
+        <option value="미디어커뮤니케이션학과">미디어커뮤니케이션학과</option>
+        <option value="경영학부">경영학부</option>
+        <option value="사회복지학과">사회복지학과</option>
+        <option value="법학부">법학부</option>
+        <option value="의류산업학과">의류산업학과</option>
+        <option value="소비자생활문화산업학과">소비자생활문화산업학과</option>
+        <option value="뷰티산업학과">뷰티산업학과</option>
+        <option value="수리통계데이터사이언스학부">수리통계데이터사이언스학부</option>
+        
+        
       </select>
       <select value={department2} onChange={(e) => setDepartment2(e.target.value)}>
         <option value="">-- 복수전공 --</option>
         <option value="국어국문학과">국어국문학과</option>
         <option value="영어영문학과">영어영문학과</option>
       </select>
-      {passwordMatchError && <p>Passwords do not match</p>}
-      {showErrorText && <p>{errorMessage}</p>}
-      <button onClick={handleRegister}>Register</button>
+      {passwordMatchError && <p className="error">Passwords do not match</p>}
+      {showErrorText && <p className="error">{errorMessage}</p>}
+      <button className="register-button" onClick={handleRegister}>Register</button>
     </div>
   );
 }

@@ -18,6 +18,7 @@ import { AuthProvider } from './utils/AuthContext';
 function App() {
   return (
     <AuthProvider>
+      <div>
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -30,12 +31,13 @@ function App() {
         <Route path="/noticeList" element={<NoticeList />} />
         <Route path="/activityList" element={<ActivityList />} />
         <Route path='/portfolioList' element={<PortfolioList />} />
-        <Route path='/myportfolio/:portfolioId' element={<MyPortfolio />} />
+        <Route path='/myPortfolio/:portfolioId' element={<MyPortfolio />} />
         <Route path='createportfolio' element={<CreatePortfolio />} />
         {/* 다른 페이지들도 추가 가능 */}
         <Route path="/login" element={<Login />} /> 
         <Route path="/mailSend" element={<MailSend />} /> 
       </Routes>
+    </div>
     </AuthProvider>
   );
 }

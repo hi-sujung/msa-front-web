@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import '../styles/CreatePortfolio.css';
+import { useAuth } from './../utils/AuthContext';
+
+const portfolioUrl = process.env.REACT_APP_PORTFOLIO_URL;
 
 export default function CreatePortfolio() {
   const [portfolioData, setPortfolio] = useState({});
   const [editedTitle, setEditedTitle] = useState('');
   const [editedSubTitle, setEditedSubTitle] = useState('');
   const [editedContent, setEditedContent] = useState('');
-
-  const token = localStorage.getItem('token'); // 로컬 스토리지에서 토큰 가져오기
+  const { user, token } = useAuth();
+  const navigate = useNavigate();
 
   const CreatePortfolioData = async (updatedData) => {
     const headers = {
@@ -17,7 +21,7 @@ export default function CreatePortfolio() {
   
     try {
       const response = await axios.post(
-        `/api/portfolio/new`,
+        portfolioUrl,
         updatedData,
         { headers }
       );
@@ -53,7 +57,7 @@ export default function CreatePortfolio() {
   };
 
   const handleHomePress = () => {
-    window.location.href = '/main'; // 페이지 이동
+    navigate('/');
   };
 
   return (

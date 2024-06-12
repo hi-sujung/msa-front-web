@@ -24,6 +24,12 @@ export default function Notice() {
     fetchRecActivityDetail();
   }, []);
 
+  useEffect(() => {
+    if (activityData.isLiked === 1) {
+      setHeartFilled(true);
+    }
+  }, [activityData]);
+
   const fetchActivityDetail = async () => {
     const headers = {
         Authorization: `Bearer ${token}`
@@ -42,14 +48,18 @@ export default function Notice() {
     }
   };
 
+  const handleNoticePress = (activityId) => {
+    navigate(`/notice/${activityId}`);
+  };
+
   const toggleHeart = async () => {
     const headers = {
       Authorization: `Bearer ${token}`
     };
-
+  
     try {
-      if (heartFilled) {
-        const response = await axios.delete(`${springNoticeUrl}likecancel?id=${activityId}`, { headers });
+      if (heartFilled === true) { 
+        const response = await axios.delete(`${springNoticeUrl}like-cancel?id=${activityId}`, { headers });
         if (response.status === 200) {
           setHeartFilled(false);
         }
@@ -57,34 +67,14 @@ export default function Notice() {
         const response = await axios.post(`${springNoticeUrl}like?actId=${activityId}`, { headers });
         if (response.status === 200) {
           setHeartFilled(true);
+          console.log("좋아요 완료:" + activityId)
         }
       }
     } catch (error) {
       console.error('Error toggling like:', error);
     }
   };
-
-  const toggleAttend = async () => {
-    const headers = {
-      Authorization: `Bearer ${token}`
-    };
-
-    try {
-      if (attendFilled) {
-        const response = await axios.delete(`${springNoticeUrl}check-cancel?id=${activityId}`, {headers});
-        if (response.status === 200) {
-          setAttendFilled(false);
-        }
-      } else {
-        const response = await axios.post(`${springNoticeUrl}check?actId=${activityId}`, {headers});
-        if (response.status === 200) {
-          setAttendFilled(true);
-        }
-      }
-    } catch (error) {
-      console.error('Error toggling attendance:', error);
-    }
-  };
+  
 
   const handleReplace = () => {
     if (activityData && activityData.content) {
@@ -99,7 +89,7 @@ export default function Notice() {
 
   const fetchRecActivityDetail = async () => {
     try {
-      const response = await axios.get(`${recNotice}?id=${activityId}`);
+      const response = await axios.get(`${recNotice}univ?activity_name=${activityId}`);
       if (response.status === 200) {
         setRecActivityData(response.data);
       }
@@ -159,19 +149,6 @@ export default function Notice() {
           </div>
         </div>
 
-        <div className="buttonContainer">
-          <button className="heartButton" onClick={toggleHeart}>
-            {heartFilled ? <AiFillHeart color="red" /> : <AiOutlineHeart />}
-          </button>
-          <button
-            className="attendButton"
-            onClick={toggleAttend}
-            style={{ backgroundColor: attendFilled ? "grey" : "rgba(153, 153, 255, 0.3)" }}
-          >
-            {attendFilled ? "참여 취소" : "참여"}
-          </button>
-        </div>
-
         <div className="recommended">
           <h2 className="recommendedTitle">추천 게시물</h2>
           {recActivityData.map(item => (
@@ -184,3 +161,4 @@ export default function Notice() {
     </div>
   );
 }
+

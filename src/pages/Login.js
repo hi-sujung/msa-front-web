@@ -17,7 +17,7 @@ function Login() {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post(`${memberUrl}/login`, {
+      const response = await axios.post(`${memberUrl}login`, {
         email: email,
         password: password
       });
