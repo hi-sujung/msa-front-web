@@ -29,7 +29,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Header() {
   const linkStyle = {
-    color: '#694573',
+    color: '#4A55A2',
     textDecoration: 'none'
   };
 
@@ -44,7 +44,7 @@ function Header() {
         <Navbar.Brand as={Link} to="/" style={{ paddingLeft: '1rem' }}>HI-SUJUNG</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarNav" />
         <Navbar.Collapse id="navbarNav">
-          <Nav className="mr-auto">
+          <Nav className="ml-auto"> {/* ml-auto for right alignment */}
             <Nav.Item>
               <Nav.Link as={Link} to="/" style={linkStyle} aria-current="page">홈</Nav.Link>
             </Nav.Item>
@@ -65,6 +65,9 @@ function Header() {
             </Nav.Item>
             <Nav.Item>
               <Nav.Link as={Link} to="/portfolioList" style={linkStyle}>포트폴리오 목록</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link as={Link} to="/attendActList" style={linkStyle}>참여한 대외활동</Nav.Link>
             </Nav.Item>
           </Nav>
         </Navbar.Collapse>
