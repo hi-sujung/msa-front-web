@@ -6,6 +6,7 @@ import Register from './pages/Register';
 import NoticeList from './pages/NoticeList';
 import ActivityList from './pages/ActivityList';
 import Login from './pages/Login';
+import MailSend from './pages/MailSend';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/activityList" element={<ActivityList />} />
         {/* 다른 페이지들도 추가 가능 */}
         <Route path="/login" element={<Login />} /> 
+        <Route path="/mailSend" element={<MailSend />} /> 
       </Routes>
     </div>
   );
