@@ -8,8 +8,8 @@ function Header() {
         <ul>
           <li><Link to="/">Home</Link></li>
           <li><Link to="/register">회원가입</Link></li>
-          <li><Link to="/notices">공지사항</Link></li>
-          <li><Link to="/activities">대외활동</Link></li>
+          <li><Link to="/noticeList">공지사항</Link></li>
+          <li><Link to="/activityList">대외활동</Link></li>
         </ul>
       </nav>
     </header>

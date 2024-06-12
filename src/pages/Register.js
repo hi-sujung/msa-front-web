@@ -19,13 +19,13 @@ export default function Register() {
     handleChkPwd();
     try {
     //   const response = await axios.post(`${API_URL}/join`, {
-        const response = await axios.post(memberUrl, {
-        email: email,
-        username: username,
-        password: password,
+        const response = await axios.post(`${memberUrl}/join`, {
+        email,
+        username,
+        password,
         checkedPassword: confirmPassword,
-        department1: department1,
-        department2: department2,
+        department1,
+        department2,
         role: "USER"
       });
 

@@ -3,8 +3,8 @@ import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Home from './pages/Home';
 import Register from './pages/Register';
-import Notices from './pages/Notices';
-import Activities from './pages/Activities';
+import NoticeList from './pages/NoticeList';
+import ActivityList from './pages/ActivityList';
 
 function App() {
   return (
@@ -13,8 +13,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/notices" element={<Notices />} />
-        <Route path="/activities" element={<Activities />} />
+        <Route path="/noticeList" element={<NoticeList />} />
+        <Route path="/activityList" element={<ActivityList />} />
         {/* 다른 페이지들도 추가 가능 */}
       </Routes>
     </div>
