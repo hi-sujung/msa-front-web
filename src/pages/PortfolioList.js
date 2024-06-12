@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Header from '../components/Header';
 import '../styles/PortfolioList.css';
 import { useAuth } from './../utils/AuthContext';
 import { useNavigate } from 'react-router-dom';
@@ -42,7 +41,6 @@ export default function PortfolioList() {
 
   return (
     <div className="container">
-      <Header />
       <header className="header" onClick={() => handleHomePress()}>
         <h1>나의 포트폴리오 목록</h1>
       </header>
