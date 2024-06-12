@@ -1,4 +1,4 @@
-// AuthContext.js
+// 사용자 인증 관련 저장
 import React, { createContext, useContext, useState } from 'react';
 
 // AuthContext 생성
