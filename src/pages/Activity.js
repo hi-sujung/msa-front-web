@@ -5,11 +5,7 @@ import { AiFillHeart, AiOutlineHeart, AiFillHome } from 'react-icons/ai';
 import { useAuth } from './../utils/AuthContext';
 import '../styles/Activity.css';
 
-const activityUrl = process.env.REACT_APP_ACTIVITY_API_URL;
-// const springActivityUrl = process.env.REACT_APP_SPRING_GATEWAY_ACTIVITY_URL;
-// const authActivityUrl = process.env.REACT_APP_AUTH_ACTIVITY_URL;
 const authActivityUrl = '/hisujung/notice/externalact/auth/';
-const recNotice = process.env.REACT_APP_REC_API_URL;
 
 export default function Activity() {
   const [initialLikedState, setInitialLikedState] = useState(false);
@@ -83,7 +79,7 @@ export default function Activity() {
           setAttendFilled(false);
         }
       } else {
-        const response = await axios.post(`${authActivityUrl}check?actId=${activityId}`, { headers });
+        const response = await axios.post(`${authActivityUrl}check?actId=${activityId}`, null, { headers });
         // const response = await axios.post(`/hisujung/notice/externalact/auth/check?actId=${activityId}`, null, { headers });
         if (response.status === 200) {
           setAttendFilled(true);
@@ -108,8 +104,8 @@ export default function Activity() {
 
   const fetchRecActivityDetail = async () => {
     try {
-      const response = await axios.get(`${recNotice}external?activity_name=${activityId}`);
-      // const response = await axios.get(`/hisujung/recommend/external?activity_name=${activityId}`);
+      // const response = await axios.get(`${recNotice}external?activity_name=${activityId}`);
+      const response = await axios.get(`/hisujung/recommend/external?activity_name=${activityId}`);
       if (response.status === 200) {
         setRecActivityData(response.data);
       }

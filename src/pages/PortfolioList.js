@@ -21,7 +21,8 @@ export default function PortfolioList() {
     };
 
     try {
-      const response = await axios.get(`${portfolioListUrl}portfoliolist`, { headers });
+      // const response = await axios.get(`${portfolioListUrl}portfoliolist`, { headers });
+      const response = await axios.get(`/hisujung/portfolio/auth/portfoliolist`, { headers });
       if (response.status === 200) {
         setPortfolioList(response.data.data || []);  // Set portfolioList to an empty array if response.data.data is undefined
         console.log("포트폴리오 목록" + portfolioList);
