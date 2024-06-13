@@ -109,8 +109,34 @@ export default function Register() {
         <option value="바이오신약의과학부">바이오신약의과학부</option>
         <option value="바이오헬스융합학부">바이오헬스융합학부</option>
         <option value="스포츠과학부">스포츠과학부</option>
-
+        <option value="서비스·디자인공학과">서비스·디자인공학과</option>
+        <option value="융합보안공학과">융합보안공학과</option>
+        <option value="컴퓨터공학과">컴퓨터공학과</option>
+        <option value="청정융합에너지공학과">청정융합에너지공학과</option>
+        <option value="바이오식품공학과">바이오식품공학과</option>
+        <option value="바이오생명공학과">바이오생명공학과</option>
+        <option value="간호학과">간호학과</option>
+        <option value="교육학과">교육학과</option>
+        <option value="사회교육과">사회교육과</option>
+        <option value="윤리교육과">윤리교육과</option>
+        <option value="한문교육과">한문교육과</option>
+        <option value="유아교육과">유아교육과</option>
+        <option value="동양화과">동양화과</option>
+        <option value="서양화과">서양화과</option>
+        <option value="조소과">조소과</option>
+        <option value="공예과">공예과</option>
+        <option value="디자인과">디자인과</option>
+        <option value="성악과">성악과</option>
+        <option value="기악과">기악과</option>
+        <option value="작곡과">작곡과</option>
         
+      </select>
+      <select value={department2} onChange={(e) => setDepartment2(e.target.value)}>
+        <option value="">-- 복수전공 --</option>
+        <option value="국어국문학과">국어국문학과</option>
+        <option value="영어영문학과">영어영문학과</option>
+        <option value="독일어문·문화학과">독일어문·문화학과</option>
+        <option value="프랑스어문·문화학과">프랑스어문·문화학과</option>
         <option value="일본어문·문화학과">일본어문·문화학과</option>
         <option value="중국어문·문화학과">중국어문·문화학과</option>
         <option value="사학과">사학과</option>
@@ -129,13 +155,30 @@ export default function Register() {
         <option value="소비자생활문화산업학과">소비자생활문화산업학과</option>
         <option value="뷰티산업학과">뷰티산업학과</option>
         <option value="수리통계데이터사이언스학부">수리통계데이터사이언스학부</option>
-        
-        
-      </select>
-      <select value={department2} onChange={(e) => setDepartment2(e.target.value)}>
-        <option value="">-- 복수전공 --</option>
-        <option value="국어국문학과">국어국문학과</option>
-        <option value="영어영문학과">영어영문학과</option>
+        <option value="화학·에너지융합학부">화학·에너지융합학부</option>
+        <option value="바이오신약의과학부">바이오신약의과학부</option>
+        <option value="바이오헬스융합학부">바이오헬스융합학부</option>
+        <option value="스포츠과학부">스포츠과학부</option>
+        <option value="서비스·디자인공학과">서비스·디자인공학과</option>
+        <option value="융합보안공학과">융합보안공학과</option>
+        <option value="컴퓨터공학과">컴퓨터공학과</option>
+        <option value="청정융합에너지공학과">청정융합에너지공학과</option>
+        <option value="바이오식품공학과">바이오식품공학과</option>
+        <option value="바이오생명공학과">바이오생명공학과</option>
+        <option value="간호학과">간호학과</option>
+        <option value="교육학과">교육학과</option>
+        <option value="사회교육과">사회교육과</option>
+        <option value="윤리교육과">윤리교육과</option>
+        <option value="한문교육과">한문교육과</option>
+        <option value="유아교육과">유아교육과</option>
+        <option value="동양화과">동양화과</option>
+        <option value="서양화과">서양화과</option>
+        <option value="조소과">조소과</option>
+        <option value="공예과">공예과</option>
+        <option value="디자인과">디자인과</option>
+        <option value="성악과">성악과</option>
+        <option value="기악과">기악과</option>
+        <option value="작곡과">작곡과</option>
       </select>
       {passwordMatchError && <p className="error">Passwords do not match</p>}
       {showErrorText && <p className="error">{errorMessage}</p>}

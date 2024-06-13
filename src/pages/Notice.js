@@ -6,7 +6,8 @@ import { useAuth } from './../utils/AuthContext';
 import '../styles/Activity.css';
 
 const activityUrl = process.env.REACT_APP_NOTICE_API_URL;
-const springNoticeUrl = process.env.REACT_APP_SPRING_GATEWAY_NOTICE_URL;
+// const springNoticeUrl = process.env.REACT_APP_SPRING_GATEWAY_NOTICE_URL;
+const springNoticeUrl = process.env.REACT_APP_NOTICE_URL;
 const recNotice = process.env.REACT_APP_REC_API_URL;
 
 export default function Notice() {
@@ -39,7 +40,7 @@ export default function Notice() {
     };
 
     try {
-      const response = await axios.get(`${springNoticeUrl}id?actId=${activityId}`, {headers});
+      const response = await axios.get(`/api/notice/univactivity/id?actId=${activityId}`, {headers});
       if (response.status === 200) {
         const data = response.data;
         setActivityData(data);
@@ -62,12 +63,12 @@ export default function Notice() {
   
     try {
       if (heartFilled === true) { 
-        const response = await axios.delete(`${springNoticeUrl}like-cancel?id=${activityId}`, { headers });
+        const response = await axios.delete(`/api/notice/univactivity/like-cancel?id=${activityId}`, { headers });
         if (response.status === 200) {
           setHeartFilled(false);
         }
       } else {
-        const response = await axios.post(`${springNoticeUrl}like?actId=${activityId}`, null, { headers });
+        const response = await axios.post(`/api/notice/univactivity/like?actId=${activityId}`, null, { headers });
         if (response.status === 200) {
           setHeartFilled(true);
           console.log("좋아요 완료:" + response.data)
@@ -92,7 +93,7 @@ export default function Notice() {
 
   const fetchRecActivityDetail = async () => {
     try {
-      const response = await axios.get(`${recNotice}univ?activity_name=${activityId}`);
+      const response = await axios.get(`/api/recommend/univ?activity_name=${activityId}`);
       if (response.status === 200) {
         setRecActivityData(response.data);
         console.log(response.data);
