@@ -14,7 +14,6 @@ function ActivityList() {
   useEffect(() => {
     const fetchActivityList = async () => {
       try {
-        const response = await axios.get(`${springActivityUrl}checked-list`, { headers });
         const response = await axios.get(activityUrl);
         if (response.status === 200) {
           setActivityList(response.data);
