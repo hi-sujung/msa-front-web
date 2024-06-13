@@ -80,9 +80,9 @@ export default function NoticeScreen() {
         <div style={styles.container}>
             <div style={styles.linearGradient}>
                 <div style={styles.header}>
-                    <button onClick={handleHomePress} className="homeButton">
+                    {/* <button onClick={handleHomePress} className="homeButton">
                         <AiFillHome />
-                    </button>
+                    </button> */}
                     <h1 style={styles.headerTitle}>찜한 활동</h1>
                 </div>
             </div>
