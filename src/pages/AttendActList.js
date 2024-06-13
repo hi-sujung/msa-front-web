@@ -28,7 +28,7 @@ export default function AttendActList() {
 
     try {
       // const response = await axios.get(`${springActivityUrl}checked-list`, { headers });
-      const response = await axios.get(`/hisujung/notice/externalact/checked-list`, { headers });
+      const response = await axios.get(`/hisujung/notice/externalact/auth/checked-list`, { headers });
       if (response.status === 200) {
         setAttendList(response.data);
       }

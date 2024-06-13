@@ -38,7 +38,8 @@ export default function NoticeScreen() {
         };
 
         try {
-            const response = await axios.get(`${REACT_APP_SPRING_GATEWAY_UNIV_URL}like-list`, { headers });
+             // const response = await axios.get(`${REACT_APP_SPRING_GATEWAY_EXT_URL}like-list`, { headers });
+            const response = await axios.get(`/hisujung/notice/univactivity/auth/like-list`, { headers });
             if (response.status === 200) {
                 console.log('Uni like list data:', response.data); // 콘솔 로그 추가
                 setUniLikeList(response.data);
@@ -54,7 +55,8 @@ export default function NoticeScreen() {
         };
 
         try {
-            const response = await axios.get(`${REACT_APP_SPRING_GATEWAY_EXT_URL}like-list`, { headers });
+            // const response = await axios.get(`${REACT_APP_SPRING_GATEWAY_EXT_URL}like-list`, { headers });
+            const response = await axios.get(`/hisujung/notice/externalact/auth/like-list`, { headers });
             if (response.status === 200) {
                 console.log('Ext like list data:', response.data); // 콘솔 로그 추가
                 setExtLikeList(response.data);

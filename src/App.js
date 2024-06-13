@@ -34,7 +34,7 @@ function App() {
         <Route path="/attendActList" element={<AttendActList />} />
         <Route path='/portfolioList' element={<PortfolioList />} />
         <Route path='/myPortfolio/:portfolioId' element={<MyPortfolio />} />
-        <Route path='createportfolio' element={<CreatePortfolio />} />
+        <Route path='/createportfolio' element={<CreatePortfolio />} />
         <Route path="/login" element={<Login />} /> 
         <Route path="/mailSend" element={<MailSend />} /> 
       </Routes>
