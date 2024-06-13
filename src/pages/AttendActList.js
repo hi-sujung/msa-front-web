@@ -27,6 +27,7 @@ export default function AttendActList() {
     };
 
     try {
+      // const response = await axios.get(`${springActivityUrl}checked-list`, { headers });
       const response = await axios.get(`/hisujung/notice/externalact/checked-list`, { headers });
       if (response.status === 200) {
         setAttendList(response.data);
@@ -42,6 +43,7 @@ export default function AttendActList() {
         Authorization: `Bearer ${token}`
       };
 
+      // const response = await axios.post(`${springAutoCreateUrl}create-by-ai?careerField=${careerKeyword}&title=${portfolioTitle}`, { headers });
       const response = await axios.post(`/hisujung/notice/portfolio/create-by-ai?careerField=${careerKeyword}&title=${portfolioTitle}`, { headers });
       if (response.status === 200) {
         console.log("포트폴리오 자동 생성 완료");
