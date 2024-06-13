@@ -16,8 +16,9 @@ export default function Notice() {
   const { activityId } = useParams();
   const [activityData, setActivityData] = useState({});
   const [recActivityData, setRecActivityData] = useState([]);
-  const { user, token } = useAuth();
+  // const { user, token } = useAuth();
   const navigate = useNavigate();
+  const token = localStorage.getItem('token');
 
   console.log(token);
 
@@ -66,10 +67,10 @@ export default function Notice() {
           setHeartFilled(false);
         }
       } else {
-        const response = await axios.post(`${springNoticeUrl}like?actId=${activityId}`, { headers });
+        const response = await axios.post(`${springNoticeUrl}like?actId=${activityId}`, null, { headers });
         if (response.status === 200) {
           setHeartFilled(true);
-          console.log("좋아요 완료:" + activityId)
+          console.log("좋아요 완료:" + response.data)
         }
       }
     } catch (error) {

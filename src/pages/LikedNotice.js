@@ -15,8 +15,9 @@ const REACT_APP_SPRING_GATEWAY_EXT_URL = process.env.REACT_APP_SPRING_GATEWAY_AC
 export default function NoticeScreen() {
     const [uniLikeList, setUniLikeList] = useState([]);
     const [extLikeList, setExtLikeList] = useState([]);
-    const { user, token } = useAuth(); // 현재 로그인한 유저의 user, token
+    // const { user, token } = useAuth(); // 현재 로그인한 유저의 user, token
     const navigate = useNavigate();
+    const token = localStorage.getItem('token');
 
     useEffect(() => {
         const fetchData = async () => {

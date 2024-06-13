@@ -9,8 +9,9 @@ export default function AttendActList() {
   const [modalVisible, setModalVisible] = useState(false);
   const [careerKeyword, setCareerKeyword] = useState('');
   const [portfolioTitle, setPortfolioTitle] = useState('');
-  const { user, token } = useAuth();
+  // const { user, token } = useAuth();
   const navigate = useNavigate();
+  const token = localStorage.getItem('token');
 
   const springNoticeUrl = process.env.REACT_APP_SPRING_GATEWAY_NOTICE_URL;
   const springActivityUrl = process.env.REACT_APP_SPRING_GATEWAY_ACTIVITY_URL;
