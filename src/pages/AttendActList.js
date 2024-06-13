@@ -43,9 +43,11 @@ export default function AttendActList() {
       };
 
       const response = await axios.post(`/hisujung/notice/portfolio/auth/create-by-ai?careerField=${careerKeyword}&title=${portfolioTitle}`, null, { headers });
+      
       if (response.status === 200) {
         alert('포트폴리오가 자동 생성되었습니다.');
         console.log("포트폴리오 자동 생성 완료");
+        navigate('/portfolioList');
       }
     } catch (error) {
       console.error('Error Auto-Creating portfolio data:', error);
@@ -67,6 +69,7 @@ export default function AttendActList() {
   const handleModalSubmit = () => {
     createAutoPortfolio();
     setModalVisible(false);
+    alert('포트폴리오를 생성합니다.\n약 1분 이상 소요될 수 있습니다.\n완료되면 포트폴리오 페이지로 이동합니다.');
   };
 
   const handleModalCancel = () => {

@@ -54,7 +54,7 @@ export default function Activity() {
           setHeartFilled(false);
         }
       } else {
-        const response = await axios.post(`${authActivityUrl}like?actId=${activityId}`, { headers });
+        const response = await axios.post(`${authActivityUrl}like?actId=${activityId}`, null, { headers });
         // const response = await axios.post(`/hisujung/notice/externalact/auth/like?actId=${activityId}`, null, { headers });
         if (response.status === 200) {
           setHeartFilled(true);
