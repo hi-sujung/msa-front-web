@@ -49,10 +49,13 @@ function Header() {
               <Nav.Link as={Link} to="/" style={linkStyle} aria-current="page">홈</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link as={Link} to="/register" style={linkStyle}>회원가입</Nav.Link>
+              <Nav.Link as={Link} to="/mailSend" style={linkStyle}>회원가입</Nav.Link>
             </Nav.Item>
             <Nav.Item>
               <Nav.Link as={Link} to="/login" style={linkStyle}>로그인</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link as={Link} to="/logout" style={linkStyle}>로그아웃</Nav.Link>
             </Nav.Item>
             <Nav.Item>
               <Nav.Link as={Link} to="/noticeList" style={linkStyle}>공지사항</Nav.Link>

@@ -22,7 +22,6 @@ function Login() {
         email: email,
         password: password
       });
-      console.log(response.data.userId);
 
       if (response.status === 200) {
         console.log(response.data.token);

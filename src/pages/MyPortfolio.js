@@ -22,7 +22,7 @@ export default function MyPortfolio() {
 
   const fetchPortfolioData = async () => {
     try {
-      const response = await axios.get(`${PORTFOLIO_URL}id?id=${portfolioId}`);
+      const response = await axios.get(`/hisujung/portfolio/id?id=${portfolioId}`);
       if (response.status === 200) {
         setPortfolioData(response.data.data);
         setEditedTitle(response.data.data.title);
@@ -43,7 +43,7 @@ export default function MyPortfolio() {
 
     try {
       const response = await axios.post(
-        `${PORTFOLIO_URL}update/id?id=${portfolioId}`,
+        `/hisujung/portfolio/update/id?id=${portfolioId}`,
         updatedData
       );
 
@@ -59,12 +59,12 @@ export default function MyPortfolio() {
     }
   };
 
-  const handleDelete = async () => {
+  const handleDelete = async (portfolioId) => {
     try {
-      const response = await axios.delete(`${PORTFOLIO_URL}portfolio/id?id=${portfolioId}`);
+      const response = await axios.delete(`/hisujung/portfolio/portfolio/id?id=${portfolioId}`);
   
       if (response.status === 200) {
-        console.log('Portfolio deleted');
+        console.log('포트폴리오 삭제 완료');
         handleHomePress();
       } else {
         console.error('Failed to delete portfolio:', response.status);
@@ -116,7 +116,7 @@ export default function MyPortfolio() {
             <p>{portfolioData.description}</p>
           </>
         )}
-        <button onClick={handleDelete}>삭제</button>
+        <button onClick={() => handleDelete(portfolioData.id)}>삭제</button>
       </main>
     </div>
   );

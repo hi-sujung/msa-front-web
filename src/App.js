@@ -12,6 +12,7 @@ import Activity from './pages/Activity';
 import Notice from './pages/Notice';
 import LikedNotice from './pages/LikedNotice';
 import Login from './pages/Login';
+import Logout from './pages/Logout';
 import MailSend from './pages/MailSend';
 import AttendActList from './pages/AttendActList';
 import { AuthProvider } from './utils/AuthContext';
@@ -34,8 +35,8 @@ function App() {
         <Route path="/attendActList" element={<AttendActList />} />
         <Route path='/portfolioList' element={<PortfolioList />} />
         <Route path='/myPortfolio/:portfolioId' element={<MyPortfolio />} />
-        <Route path='createportfolio' element={<CreatePortfolio />} />
-        <Route path="/login" element={<Login />} /> 
+        <Route path='/createportfolio' element={<CreatePortfolio />} />
+        <Route path="/logout" element={<Logout />} /> 
         <Route path="/mailSend" element={<MailSend />} /> 
       </Routes>
     </div>

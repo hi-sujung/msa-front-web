@@ -5,18 +5,9 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../utils/AuthContext'; // 이 부분은 그대로 유지
 import '../styles/LikedNotice.css';
 
-const REACT_APP_NOTICE_API_URL = process.env.REACT_APP_NOTICE_API_URL;
-const REACT_APP_ACTIVITY_API_URL = process.env.REACT_APP_ACTIVITY_API_URL;
-const REACT_APP_REC_API_URL = process.env.REACT_APP_REC_API_URL;
-const REACT_APP_MEMBER_API_URL = process.env.REACT_APP_MEMBER_API_URL;
-// const REACT_APP_SPRING_GATEWAY_UNIV_URL = process.env.REACT_APP_SPRING_GATEWAY_NOTICE_URL;
-const REACT_APP_SPRING_GATEWAY_UNIV_URL = process.env.REACT_APP_NOTICE_API_URL;
-// const REACT_APP_SPRING_GATEWAY_EXT_URL = process.env.REACT_APP_SPRING_GATEWAY_ACTIVITY_URL;
-const REACT_APP_SPRING_GATEWAY_EXT_URL = process.env.REACT_APP_ACTIVITY_API_URL;
+const noticeUrl = '/hisujung/notice/';
 
-
-
-export default function NoticeScreen() {
+export default function LikedNotice() {
     const [uniLikeList, setUniLikeList] = useState([]);
     const [extLikeList, setExtLikeList] = useState([]);
     // const { user, token } = useAuth(); // 현재 로그인한 유저의 user, token
@@ -38,7 +29,7 @@ export default function NoticeScreen() {
         };
 
         try {
-            const response = await axios.get(`${REACT_APP_SPRING_GATEWAY_UNIV_URL}like-list`, { headers });
+            const response = await axios.get(`${noticeUrl}univactivity/auth/like-list`, { headers });
             if (response.status === 200) {
                 console.log('Uni like list data:', response.data); // 콘솔 로그 추가
                 setUniLikeList(response.data);
@@ -54,7 +45,7 @@ export default function NoticeScreen() {
         };
 
         try {
-            const response = await axios.get(`${REACT_APP_SPRING_GATEWAY_EXT_URL}like-list`, { headers });
+            const response = await axios.get(`${noticeUrl}externalact/auth/like-list`, { headers });
             if (response.status === 200) {
                 console.log('Ext like list data:', response.data); // 콘솔 로그 추가
                 setExtLikeList(response.data);
