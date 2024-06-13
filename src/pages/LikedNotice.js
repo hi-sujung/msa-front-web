@@ -3,21 +3,25 @@ import axios from 'axios';
 import { AiFillHeart, AiOutlineHeart, AiFillHome } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../utils/AuthContext'; // 이 부분은 그대로 유지
-//import { AntDesign } from 'react-icons/ant';
 import '../styles/LikedNotice.css';
 
 const REACT_APP_NOTICE_API_URL = process.env.REACT_APP_NOTICE_API_URL;
 const REACT_APP_ACTIVITY_API_URL = process.env.REACT_APP_ACTIVITY_API_URL;
 const REACT_APP_REC_API_URL = process.env.REACT_APP_REC_API_URL;
 const REACT_APP_MEMBER_API_URL = process.env.REACT_APP_MEMBER_API_URL;
-const REACT_APP_SPRING_GATEWAY_UNIV_URL = process.env.REACT_APP_SPRING_GATEWAY_NOTICE_URL;
-const REACT_APP_SPRING_GATEWAY_EXT_URL = process.env.REACT_APP_SPRING_GATEWAY_ACTIVITY_URL;
+// const REACT_APP_SPRING_GATEWAY_UNIV_URL = process.env.REACT_APP_SPRING_GATEWAY_NOTICE_URL;
+const REACT_APP_SPRING_GATEWAY_UNIV_URL = process.env.REACT_APP_NOTICE_API_URL;
+// const REACT_APP_SPRING_GATEWAY_EXT_URL = process.env.REACT_APP_SPRING_GATEWAY_ACTIVITY_URL;
+const REACT_APP_SPRING_GATEWAY_EXT_URL = process.env.REACT_APP_ACTIVITY_API_URL;
+
+
 
 export default function NoticeScreen() {
     const [uniLikeList, setUniLikeList] = useState([]);
     const [extLikeList, setExtLikeList] = useState([]);
-    const { user, token } = useAuth(); // 현재 로그인한 유저의 user, token
+    // const { user, token } = useAuth(); // 현재 로그인한 유저의 user, token
     const navigate = useNavigate();
+    const token = localStorage.getItem('token');
 
     useEffect(() => {
         const fetchData = async () => {
@@ -36,6 +40,7 @@ export default function NoticeScreen() {
         try {
             const response = await axios.get(`${REACT_APP_SPRING_GATEWAY_UNIV_URL}like-list`, { headers });
             if (response.status === 200) {
+                console.log('Uni like list data:', response.data); // 콘솔 로그 추가
                 setUniLikeList(response.data);
             }
         } catch (error) {
@@ -51,6 +56,7 @@ export default function NoticeScreen() {
         try {
             const response = await axios.get(`${REACT_APP_SPRING_GATEWAY_EXT_URL}like-list`, { headers });
             if (response.status === 200) {
+                console.log('Ext like list data:', response.data); // 콘솔 로그 추가
                 setExtLikeList(response.data);
             }
         } catch (error) {
@@ -60,7 +66,15 @@ export default function NoticeScreen() {
 
     const handleHomePress = () => {
         navigate('/');
-      };
+    };
+
+    const handleActivityPress = (activityId) => {
+        navigate(`/activity/${activityId}`);
+    };
+
+    const handleNoticePress = (activityId) => {
+        navigate(`/notice/${activityId}`);
+    };
 
     return (
         <div style={styles.container}>
@@ -78,8 +92,8 @@ export default function NoticeScreen() {
                         <li key={item.id} style={styles.activityItem}>
                             <button
                                 onClick={() => item.postDepartment
-                                    ? navigate('/notice/', { state: { activityId: item.id } })
-                                    : navigate('/activity/', { state: { activityId: item.id } })
+                                    ? handleNoticePress(item.id)
+                                    : handleActivityPress(item.id)
                                 }
                                 style={styles.button}
                             >

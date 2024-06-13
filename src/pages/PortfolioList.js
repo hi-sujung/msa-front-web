@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../styles/PortfolioList.css';
-import { useAuth } from './../utils/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
 export default function PortfolioList() {
   const [portfolioList, setPortfolioList] = useState([]);
-  const { user, token } = useAuth();
+  // const { user, token } = useAuth();
   const navigate = useNavigate();
+  const token = localStorage.getItem('token');
 
   const portfolioListUrl = process.env.REACT_APP_SPRING_GATEWAY_PORTFOLIO_URL;
 
@@ -24,6 +24,8 @@ export default function PortfolioList() {
       const response = await axios.get(`${portfolioListUrl}portfoliolist`, { headers });
       if (response.status === 200) {
         setPortfolioList(response.data.data || []);  // Set portfolioList to an empty array if response.data.data is undefined
+        console.log("포트폴리오 목록" + portfolioList);
+        console.log("포트폴리오 id" + portfolioList);
       }
     } catch (error) {
       console.error('Error fetching portfolio data:', error);

@@ -81,7 +81,7 @@ export default function MyPortfolio() {
   return (
     <div className="container">
       <header className="header">
-        <a href="/main" className="home-button">Home</a>
+        <a href="/" className="home-button">Home</a>
         <h1>포트폴리오 관리</h1>
       </header>
       <main className="main">

@@ -9,14 +9,13 @@ export default function AttendActList() {
   const [modalVisible, setModalVisible] = useState(false);
   const [careerKeyword, setCareerKeyword] = useState('');
   const [portfolioTitle, setPortfolioTitle] = useState('');
-  const { user, token } = useAuth();
+  // const { user, token } = useAuth();
   const navigate = useNavigate();
+  const token = localStorage.getItem('token');
 
   const springNoticeUrl = process.env.REACT_APP_SPRING_GATEWAY_NOTICE_URL;
   const springActivityUrl = process.env.REACT_APP_SPRING_GATEWAY_ACTIVITY_URL;
   const springAutoCreateUrl = process.env.REACT_APP_SPRING_GATEWAY_AUTOPORTFOLIO_URL;
-
-  const history = useHistory();
 
   useEffect(() => {
     fetchAttendData();
@@ -28,7 +27,7 @@ export default function AttendActList() {
     };
 
     try {
-      const response = await axios.get(`${springActivityUrl}checked-list`, { headers });
+      const response = await axios.get(`/hisujung/notice/externalact/checked-list`, { headers });
       if (response.status === 200) {
         setAttendList(response.data);
       }
@@ -43,7 +42,7 @@ export default function AttendActList() {
         Authorization: `Bearer ${token}`
       };
 
-      const response = await axios.post(`${springAutoCreateUrl}create-by-ai?careerField=${careerKeyword}&title=${portfolioTitle}`, { headers });
+      const response = await axios.post(`/hisujung/notice/portfolio/create-by-ai?careerField=${careerKeyword}&title=${portfolioTitle}`, { headers });
       if (response.status === 200) {
         console.log("포트폴리오 자동 생성 완료");
       }

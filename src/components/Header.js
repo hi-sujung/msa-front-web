@@ -13,6 +13,7 @@ function Header() {
           <li><Link to="/activityList">대외활동</Link></li>
           <li><Link to="/likedNotice">찜한 활동</Link></li>
           <li><Link to="/portfolioList">포트폴리오 목록</Link></li>
+          <li><Link to="/attendActList">참여한 대외활동</Link></li>
         </ul>
       </nav>
     </header>

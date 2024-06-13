@@ -13,6 +13,7 @@ import Notice from './pages/Notice';
 import LikedNotice from './pages/LikedNotice';
 import Login from './pages/Login';
 import MailSend from './pages/MailSend';
+import AttendActList from './pages/AttendActList';
 import { AuthProvider } from './utils/AuthContext';
 
 function App() {
@@ -30,10 +31,10 @@ function App() {
         <Route path="/likedNotice" element={<LikedNotice />} />
         <Route path="/noticeList" element={<NoticeList />} />
         <Route path="/activityList" element={<ActivityList />} />
+        <Route path="/attendActList" element={<AttendActList />} />
         <Route path='/portfolioList' element={<PortfolioList />} />
         <Route path='/myPortfolio/:portfolioId' element={<MyPortfolio />} />
         <Route path='createportfolio' element={<CreatePortfolio />} />
-        {/* 다른 페이지들도 추가 가능 */}
         <Route path="/login" element={<Login />} /> 
         <Route path="/mailSend" element={<MailSend />} /> 
       </Routes>

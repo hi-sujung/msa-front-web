@@ -6,7 +6,8 @@ import { useAuth } from './../utils/AuthContext';
 import '../styles/Activity.css';
 
 const activityUrl = process.env.REACT_APP_ACTIVITY_API_URL;
-const springActivityUrl = process.env.REACT_APP_SPRING_GATEWAY_ACTIVITY_URL;
+// const springActivityUrl = process.env.REACT_APP_SPRING_GATEWAY_ACTIVITY_URL;
+const springActivityUrl = process.env.REACT_APP_ACTIVITY_URL;
 const recNotice = process.env.REACT_APP_REC_API_URL;
 
 export default function Activity() {
@@ -16,8 +17,8 @@ export default function Activity() {
   const { activityId } = useParams();
   const [activityData, setActivityData] = useState({});
   const [recActivityData, setRecActivityData] = useState([]);
-  const { user, token } = useAuth();
   const navigate = useNavigate();
+  const token = localStorage.getItem('token');
 
   useEffect(() => {
     fetchActivityDetail();
@@ -26,7 +27,7 @@ export default function Activity() {
 
   const fetchActivityDetail = async () => {
     const headers = {
-     Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`
     };
 
     try {
@@ -49,14 +50,15 @@ export default function Activity() {
 
     try {
       if (heartFilled) {
-        const response = await axios.delete(`${springActivityUrl}likecancel?id=${activityId}`, { headers });
+        const response = await axios.delete(`/hisujung/notice/externalact/likecancel?id=${activityId}`,  { headers });
         if (response.status === 200) {
           setHeartFilled(false);
         }
       } else {
-        const response = await axios.post(`${springActivityUrl}like?actId=${activityId}`, { headers });
+        const response = await axios.post(`/hisujung/notice/externalact/likecancel?id=${activityId}`, null, { headers });
         if (response.status === 200) {
           setHeartFilled(true);
+          console.log("좋아요 완료" + response.data);
         }
       }
     } catch (error) {
@@ -71,14 +73,15 @@ export default function Activity() {
 
     try {
       if (attendFilled) {
-        const response = await axios.delete(`${springActivityUrl}check-cancel?id=${activityId}`, {headers});
+        const response = await axios.delete(`/hisujung/notice/externalact/check-cancel?id=${activityId}`, { headers });
         if (response.status === 200) {
           setAttendFilled(false);
         }
       } else {
-        const response = await axios.post(`${springActivityUrl}check?actId=${activityId}`, {headers});
+        const response = await axios.post(`/hisujung/notice/externalact/check?actId=${activityId}`, null, { headers });
         if (response.status === 200) {
           setAttendFilled(true);
+          console.log("참여 완료" + response.data);
         }
       }
     } catch (error) {
@@ -99,7 +102,7 @@ export default function Activity() {
 
   const fetchRecActivityDetail = async () => {
     try {
-      const response = await axios.get(`${recNotice}external?activity_name=${activityId}`);
+      const response = await axios.get(`/hisujung/recommend/external?activity_name=${activityId}`);
       if (response.status === 200) {
         setRecActivityData(response.data);
       }
@@ -109,7 +112,7 @@ export default function Activity() {
   };
 
   const handleActListPress = () => {
-    navigate('/actList');
+    navigate('/activityList');
   };
 
   const handleActivityPress = (activityId) => {
@@ -174,8 +177,8 @@ export default function Activity() {
 
         <div className="recommended">
           <h2 className="recommendedTitle">추천 게시물</h2>
-          {recActivityData.map(item => (
-            <div className="recommendedItem" key={item.external_act_id} onClick={() => handleActivityPress(item.external_act_id)}>
+          {recActivityData.map((item, index) => (
+            <div className="recommendedItem" key={`rec-${item.external_act_id}-${index}`} onClick={() => handleActivityPress(item.external_act_id)}>
               <span className="recommendedItemTitle">{item.title}</span>
             </div>
           ))}

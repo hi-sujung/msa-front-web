@@ -32,6 +32,9 @@ function Login() {
         const userInfo = { id: response.data.userId, name: response.data.username, email: response.data.email };
 
         login(token, userInfo);
+        localStorage.setItem('token', token); // 토큰 저장
+
+        console.log(token);
 
         console.log('login successful');
 

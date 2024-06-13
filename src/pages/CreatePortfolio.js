@@ -4,15 +4,16 @@ import { useNavigate } from 'react-router-dom';
 import '../styles/CreatePortfolio.css';
 import { useAuth } from './../utils/AuthContext';
 
-const portfolioUrl = process.env.REACT_APP_PORTFOLIO_URL;
+const portfolioUrl = process.env.REACT_APP_SPRING_GATEWAY_PORTFOLIO_URL;
 
 export default function CreatePortfolio() {
   const [portfolioData, setPortfolio] = useState({});
   const [editedTitle, setEditedTitle] = useState('');
   const [editedSubTitle, setEditedSubTitle] = useState('');
   const [editedContent, setEditedContent] = useState('');
-  const { user, token } = useAuth();
+  // const { user, token } = useAuth();
   const navigate = useNavigate();
+  const token = localStorage.getItem('token');
 
   const CreatePortfolioData = async (updatedData) => {
     const headers = {
@@ -21,7 +22,7 @@ export default function CreatePortfolio() {
   
     try {
       const response = await axios.post(
-        portfolioUrl,
+        `/hisujung/portfolio/portfolio/new`,
         updatedData,
         { headers }
       );
