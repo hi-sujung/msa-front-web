@@ -22,7 +22,8 @@ export default function CreatePortfolio() {
   
     try {
       const response = await axios.post(
-        `/hisujung/portfolio/portfolio/new`,
+        // `${portfolioUrl}new`,
+        `/hisujung/portfolio/new`,
         updatedData,
         { headers }
       );
