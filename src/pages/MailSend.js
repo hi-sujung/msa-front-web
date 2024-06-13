@@ -20,7 +20,7 @@ export default function MailSend() {
     }
     try {
       const fullEmail = email + "@sungshin.ac.kr";
-      
+
       const response = await axios.post(`/hisujung/member/mailSend`,
         {
           email: fullEmail
@@ -33,7 +33,6 @@ export default function MailSend() {
       );
 
       setShowSuccessMessage(true);
-      handleRegisterPress();
       setShowErrorText(false);
 
       console.log('이메일 전송 응답:', response.data);
@@ -58,10 +57,6 @@ export default function MailSend() {
 
   const handleBackPress = () => {
     navigate('/login');
-  };
-
-  const handleRegisterPress = () => {
-    navigate('/register');
   };
 
   return (
@@ -89,7 +84,7 @@ export default function MailSend() {
         </div>
 
         {showSuccessMessage && (
-          <p className="successText">인증 메일이 전송되었습니다. 메시지함을 확인해주세요!</p>
+          <p className="successText">인증 메일이 전송되었습니다. 메일함을 확인해주세요!</p>
         )}
 
         {showErrorText && <p className="errorText">올바르지 않은 형식입니다.</p>}

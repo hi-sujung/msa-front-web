@@ -65,7 +65,7 @@ export default function MyPortfolio() {
   
       if (response.status === 200) {
         console.log('포트폴리오 삭제 완료');
-        handleHomePress();
+        handleToPortfolioList();
       } else {
         console.error('Failed to delete portfolio:', response.status);
       }
@@ -77,6 +77,11 @@ export default function MyPortfolio() {
   const handleHomePress = () => {
     navigate('/');
   };
+
+  const handleToPortfolioList = () => {
+    navigate('/portfolioList');
+  };
+
 
   return (
     <div className="container">

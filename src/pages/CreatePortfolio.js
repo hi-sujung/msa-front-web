@@ -31,7 +31,7 @@ export default function CreatePortfolio() {
       if (response.status === 200) {
         console.log('포트폴리오 생성 완료');
         alert('포트폴리오가 생성되었습니다.');
-        handleHomePress();
+        handleToPortfolioList();
       } else {
         console.error('포트폴리오 생성 실패:', response.status);
       }
@@ -60,6 +60,10 @@ export default function CreatePortfolio() {
 
   const handleHomePress = () => {
     navigate('/');
+  };
+
+  const handleToPortfolioList = () => {
+    navigate('/portfolioList');
   };
 
   return (
