@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useAuth } from './../utils/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Login.css'; 
+import '../styles/Home.css'; 
 
 function Login() {
   const { login } = useAuth();
@@ -52,8 +53,8 @@ function Login() {
   };
 
   return (
-    <div className="linear-gradient">
-      <div className="container">
+    <div className="homeLinearGradient">
+      <div className="homeContainer">
         <h1 className="title">안녕, 수정이</h1>
         <input
           className="input"
