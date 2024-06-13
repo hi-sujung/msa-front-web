@@ -14,7 +14,7 @@ function ActivityList() {
   useEffect(() => {
     const fetchActivityList = async () => {
       try {
-        const response = await axios.get(activityUrl);
+        const response = await axios.get('/hisujung/notice/externalact/');
         if (response.status === 200) {
           setActivityList(response.data);
         }
