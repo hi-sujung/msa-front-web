@@ -63,12 +63,12 @@ export default function MailSend() {
     <div className="linearGradient">
       <div className="container">
         <div className="headingContainer">
-          <button className="backButton" onClick={handleBackPress}>
+          {/* <button className="backButton" onClick={handleBackPress}>
             &larr;
-          </button>
+          </button> */}
           <h1 className="title">이메일 인증</h1>
         </div>
-        <p className="subtitle">인증번호 입력</p>
+        {/* <p className="subtitle">인증번호 입력</p> */}
 
         <div className="inputContainer">
           <input
@@ -92,7 +92,7 @@ export default function MailSend() {
         <div className="inputContainer">
           <input
             className="input verificationInput"
-            placeholder="인증번호"
+            placeholder="인증번호 입력"
             value={verificationCode}
             onChange={(e) => setVerificationCode(e.target.value)}
           />
