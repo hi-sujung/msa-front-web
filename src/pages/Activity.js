@@ -95,7 +95,7 @@ export default function Activity() {
     if (activityData && activityData.content) {
       return activityData.content.replaceAll('\\n', "\n");
     } else {
-      console.log('activityData or content is undefined');
+      // console.log('activityData or content is undefined');
       return '';
     }
   };
@@ -120,6 +120,7 @@ export default function Activity() {
 
   const handleActivityPress = (activityId) => {
     navigate(`/activity/${activityId}`);
+    window.location.reload(); // 페이지 새로고침
   };
 
   const handleHomePress = () => {

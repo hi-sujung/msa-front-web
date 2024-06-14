@@ -59,25 +59,25 @@ export default function Register() {
       <h1>회원가입</h1>
       <input
         type="text"
-        placeholder="Email"
+        placeholder="아이디"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
       <input
         type="text"
-        placeholder="Username"
+        placeholder="이름"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
       />
       <input
         type="password"
-        placeholder="Password"
+        placeholder="비밀번호"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
       <input
         type="password"
-        placeholder="Confirm Password"
+        placeholder="비밀번호 확인"
         value={confirmPassword}
         onChange={(e) => setConfirmPassword(e.target.value)}
       />

@@ -7,7 +7,6 @@ import '../styles/Activity.css';
 
 const authNoticeUrl = '/hisujung/notice/univactivity/auth/';
 
-
 export default function Notice() {
   const [initialLikedState, setInitialLikedState] = useState(false);
   const [heartFilled, setHeartFilled] = useState('');
@@ -35,7 +34,7 @@ export default function Notice() {
     };
 
     try {
-      const response = await axios.get(`${authNoticeUrl}id?actId=${activityId}`, {headers});
+      const response = await axios.get(`${authNoticeUrl}id?actId=${activityId}`, { headers });
       if (response.status === 200) {
         const data = response.data;
         setActivityData(data);
@@ -55,7 +54,7 @@ export default function Notice() {
     const headers = {
       Authorization: `Bearer ${token}`
     };
-  
+
     try {
       if (heartFilled === true) { 
         const response = await axios.delete(`${authNoticeUrl}like-cancel?id=${activityId}`, { headers });
@@ -73,13 +72,11 @@ export default function Notice() {
       console.error('Error toggling like:', error);
     }
   };
-  
 
   const handleReplace = () => {
     if (activityData && activityData.content) {
       return activityData.content.replaceAll('\\n', "\n");
     } else {
-      console.log('activityData or content is undefined');
       return '';
     }
   };
@@ -91,9 +88,7 @@ export default function Notice() {
       const response = await axios.get(`/hisujung/recommend/univ?activity_name=${activityId}`);
       if (response.status === 200) {
         setRecActivityData(response.data);
-        console.log(response.data);
       }
-      
     } catch (error) {
       console.error('Error fetching recommended activity detail:', error);
     }
@@ -105,6 +100,7 @@ export default function Notice() {
 
   const handleActivityPress = (activityId) => {
     navigate(`/notice/${activityId}`);
+    window.location.reload(); // 페이지 새로고침
   };
 
   const handleHomePress = () => {
@@ -167,4 +163,3 @@ export default function Notice() {
     </div>
   );
 }
-
