@@ -11,8 +11,6 @@ export default function MailSend() {
   const navigate = useNavigate();
   const [mailCode, setMailCode] = useState(null);
 
-  const memberUrl = process.env.REACT_APP_MEMBER_API_URL;
-
   const handleEmailSubmit = async () => {
     if (!email) {
       setShowErrorText(true);

@@ -14,8 +14,6 @@ export default function MyPortfolio() {
   const [editedSubTitle, setEditedSubTitle] = useState('');
   const [editedContent, setEditedContent] = useState('');
 
-  const PORTFOLIO_URL = process.env.PORTFOLIO_URL;
-
   useEffect(() => {
     fetchPortfolioData();
   }, []);

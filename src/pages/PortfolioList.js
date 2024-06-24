@@ -9,8 +9,6 @@ export default function PortfolioList() {
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
 
-  const portfolioListUrl = process.env.REACT_APP_SPRING_GATEWAY_PORTFOLIO_URL;
-
   useEffect(() => {
     fetchPortfolioData();
   }, []);

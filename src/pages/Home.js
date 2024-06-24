@@ -16,11 +16,7 @@ function Home() {
 
   const fetchUserInfo = async () => {
     if (token) {
-      // Here, you should make a call to your API to fetch user info
-      // const response = await axios.get('/your-api-endpoint', { headers: { Authorization: `Bearer ${token}` } });
-      // setUserName(response.data.userName);
-      setUserName('user.userName'); // This is just a placeholder. Replace it with actual userName from response.
-      setLoggedIn(true);
+      setUserName('user.userName'); 
     }
   };
 
