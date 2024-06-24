@@ -17,6 +17,7 @@ function Home() {
   const fetchUserInfo = async () => {
     if (token) {
       setUserName('user.userName'); 
+      setLoggedIn(true);
     }
   };
 
